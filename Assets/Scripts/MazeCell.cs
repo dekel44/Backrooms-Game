@@ -44,4 +44,13 @@ public class MazeCell : MonoBehaviour
     {
         return edges[(int)direction];
     }
+
+    public MazeRoom room;
+
+    public void Initialize(MazeRoom room)
+    {
+        room.Add(this);
+        transform.GetChild(0).GetComponent<Renderer>().material = room.settings.floorMaterial;
+    }
+
 }
