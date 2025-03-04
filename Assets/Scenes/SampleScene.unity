@@ -398,6 +398,10 @@ PrefabInstance:
       propertyPath: airMultiplier
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3073279100844569760, guid: 5a5c0975a498a4182b945f1d9c197360, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3545601154336051121, guid: 5a5c0975a498a4182b945f1d9c197360, type: 3}
       propertyPath: m_Name
       value: FPSController
