@@ -3,34 +3,41 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
+    public Maze mazePrefab;
+    private Maze mazeInstance;
 
-	public Maze mazePrefab;
+    public NavMeshBake navMeshBaker;
 
-	private Maze mazeInstance;
+    private void Start()
+    {
+        BeginGame();
+    }
 
-	private void Start()
-	{
-		BeginGame();
-	}
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            RestartGame();
+        }
+    }
 
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Y))
-		{
-			RestartGame();
-		}
-	}
+    private void BeginGame()
+    {
+        StartCoroutine(StartGameRoutine());
+    }
 
-	private void BeginGame()
-	{
-		mazeInstance = Instantiate(mazePrefab) as Maze;
-		StartCoroutine(mazeInstance.Generate());
-	}
+    private IEnumerator StartGameRoutine()
+    {
+        mazeInstance = Instantiate(mazePrefab) as Maze;
+        yield return StartCoroutine(mazeInstance.Generate());
 
-	private void RestartGame()
-	{
-		StopAllCoroutines();
-		Destroy(mazeInstance.gameObject);
-		BeginGame();
-	}
+        navMeshBaker.BakeNavMesh();
+    }
+
+    private void RestartGame()
+    {
+        StopAllCoroutines();
+        Destroy(mazeInstance.gameObject);
+        BeginGame();
+    }
 }
