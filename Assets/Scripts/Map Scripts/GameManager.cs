@@ -13,14 +13,6 @@ public class GameManager : MonoBehaviour
         BeginGame();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            RestartGame();
-        }
-    }
-
     private void BeginGame()
     {
         StartCoroutine(StartGameRoutine());
@@ -29,6 +21,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator StartGameRoutine()
     {
         mazeInstance = Instantiate(mazePrefab) as Maze;
+
         yield return StartCoroutine(mazeInstance.Generate());
 
         navMeshBaker.BakeNavMesh();
